@@ -1,0 +1,14 @@
+@CHARSET "ISO-8859-1";
+
+
+.mce-window.mce-in {
+	opacity: 1;
+	overflow-y: scroll !important;
+	overflow-x: hidden;
+	max-height: 660px !important;
+	width: 90% !important;
+}
+
+#TB_window {
+	z-index: 20000000;
+}

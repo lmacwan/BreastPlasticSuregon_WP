@@ -1,0 +1,26 @@
+﻿/*
+Theme Name: beautySpa-child
+Template: beautySpa
+Author: lmacwan
+Version: 1.0.1450179597
+Updated: 2015-12-15 11:39:57
+*/
+
+@charset "UTF-8";
+
+body:before {
+    width: -webkit-calc(0% - 289px) !important;
+    width: calc(0% - 289px) !important;
+}
+
+.container .container {
+    width: 100% !important;
+}
+
+.breadcrumbs .page-header {
+    background-color: transparent !important;
+}
+
+.hentry {
+    padding-top: 0% !important;
+}
