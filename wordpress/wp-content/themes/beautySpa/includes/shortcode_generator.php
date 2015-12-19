@@ -7,6 +7,7 @@ class Shortcode_generator {
 				'slide_wrapper' => 'Shortcode_generator::slide_wrapper',
 				'slide' => 'Shortcode_generator::slide',
 				'about' => 'Shortcode_generator::about',
+				'about_wrapper' => 'Shortcode_generator::about_wrapper',
 				'services_wrapper' => 'Shortcode_generator::services_wrapper',
 				'services_nav_wrapper' => 'Shortcode_generator::services_nav_wrapper',
 				'services_nav' => 'Shortcode_generator::services_nav',
@@ -166,7 +167,7 @@ class Shortcode_generator {
 			if ($key == 0) {
 				$text .= '<span>' . $break_text [0] . '</span>';
 			}else
-			$text .= ' '.$break_text [$key];
+                $text .= ' '.$break_text [$key];
 		}
 		$text .= '<strong class="price"><small>'.esc_html($sanitized_args['currency_symbol']).'</small>'.esc_html($sanitized_args['amount']).'</strong></h3>';
 		
@@ -310,21 +311,21 @@ class Shortcode_generator {
         </div><!-- end container -->
     </div></div>';
 		/** $html ='<div class="offer page-block-small">
-	<div class="container">
+        <div class="container">
 		<div class="row">
         
-        	<div class="col-md-2 col-sm-2 col-xs-12 wow rollIn" data-wow-offset="200" data-wow-delay="100ms">
-            	<h1><span>'.esc_html($sanitized_args['percentage_amount']).' <small>'.esc_html($sanitized_args['off_text']).'</small></span></h1>
-            </div>
-        	<div class="col-md-8 col-sm-8 col-xs-12 wow fadeInLeft" data-wow-offset="200" data-wow-delay="200ms">
-                '.$text.'
-                <p>'.esc_html($sanitized_args['para']).'</p>
-            </div>
-        	<div class="col-md-2 col-sm-2 col-xs-12 text-center wow fadeInLeft" data-wow-offset="200" data-wow-delay="300ms"><a class="btn btn-primary" href="'.esc_url($sanitized_args['button_url']).'" title="">'.esc_html($sanitized_args['button_text']).'</a></div>
-            
+        <div class="col-md-2 col-sm-2 col-xs-12 wow rollIn" data-wow-offset="200" data-wow-delay="100ms">
+        <h1><span>'.esc_html($sanitized_args['percentage_amount']).' <small>'.esc_html($sanitized_args['off_text']).'</small></span></h1>
+        </div>
+        <div class="col-md-8 col-sm-8 col-xs-12 wow fadeInLeft" data-wow-offset="200" data-wow-delay="200ms">
+        '.$text.'
+        <p>'.esc_html($sanitized_args['para']).'</p>
+        </div>
+        <div class="col-md-2 col-sm-2 col-xs-12 text-center wow fadeInLeft" data-wow-offset="200" data-wow-delay="300ms"><a class="btn btn-primary" href="'.esc_url($sanitized_args['button_url']).'" title="">'.esc_html($sanitized_args['button_text']).'</a></div>
+        
         </div><!-- end row -->
-    </div><!-- end container -->
-</div>';**/
+        </div><!-- end container -->
+        </div>';**/
 		return $html;
 	}
 	
@@ -360,7 +361,7 @@ class Shortcode_generator {
 				}else{
 					$attachment_dir = $upload_dir ['baseurl'];
 				}
-		
+                
 				$img .= ' <li class="wow fadeInLeft" data-wow-offset="200" data-wow-delay="100ms"><a href="' . $attachment_dir . '/' . $img_src ['sizes'] ['portfolio_grid'] ['file'] . '" title="'.get_post( $featured_image ['attachment_id'] )->post_excerpt.'" rel="prettyPhoto[gallery1]"><img class="img-reponsive" src="' . $attachment_dir . '/' . $img_src ['sizes'] ['portfolio_v1'] ['file'] . '" alt="Gallery"></a></li>';
 			}
 			
@@ -641,22 +642,36 @@ class Shortcode_generator {
 		return $html;
 	}
 
-    static function wdg_heading($args, $content = null) {
+    static function about_wrapper($args, $content = null) {
 		$default = array (
-				'text' => '',
+				'img_url' => '',
+				'heading' => '',
 				'para' => '' 
 		);
 		$sanitized_args = shortcode_atts ( $default, $args );
-		$break_text = explode ( '//', esc_html ( $sanitized_args ['text'] ) );
-		$text = '<h3>';
+		$break_text = explode ( '//', esc_html ( $sanitized_args ['heading'] ) );
+		$text = '<h2>';
 		foreach ( $break_text as $key => $single_text ) {
 			if (($key % 2) != 0) {
 				$text .= '<span>' . $single_text . '</span>';
 			} else
 				$text .= $single_text;
 		}
-		$text .= '</h3>';
-		$html = $text . '<p class="text-center">' . esc_html ( $sanitized_args ['para'] ) . '</p>';
+		$text .= '</h2>';
+		$html = '<div class="page-block about">
+	<div class="container">
+    	<div class="row">
+        	<div class="col-md-12 col-sm-12 text-center">
+            	<div class="aboutImg">
+        			<img class="img-responsive wow fadeInUpBig" data-wow-offset="300" src="' . esc_url ( $sanitized_args ['img_url'] ) . '" alt="About" />
+        			<img class="shadow img-responsive" src="' . get_template_directory_uri () . '/img/seperator-shadow.png" alt="Seperator shadow" />
+                </div>
+                ' . $text . '
+                <p class="text-center">' . esc_html ( $sanitized_args ['para'] ) . '</p>
+            </div>
+        </div><!-- end row -->
+    </div><!-- end container -->
+</div>';
 		return $html;
 	}
 }

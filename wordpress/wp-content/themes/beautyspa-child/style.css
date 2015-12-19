@@ -24,3 +24,7 @@ body:before {
 .hentry {
     padding-top: 0% !important;
 }
+
+.contactInfo {
+    word-spacing: 0.4em !important;
+}

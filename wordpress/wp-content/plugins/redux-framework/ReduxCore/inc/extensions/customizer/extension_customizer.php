@@ -63,7 +63,9 @@
                 $this->upload_url = ReduxFramework::$_upload_url . 'advanced-customizer/';
 
                 //add_action('wp_head', array( $this, '_enqueue_new' ));
-
+                if ( $parent->args['customizer'] == false ) {
+                    return;
+                }
 
                 // Override the ReduxCore class
                 add_filter( "redux/extension/{$this->parent->args['opt_name']}/customizer", array(
@@ -82,7 +84,7 @@
 
                 if ( empty( $this->_extension_dir ) ) {
                     $this->_extension_dir = trailingslashit( str_replace( '\\', '/', dirname( __FILE__ ) ) );
-                    $this->_extension_url = site_url( str_replace( trailingslashit( str_replace( '\\', '/', ABSPATH ) ), '', $this->_extension_dir ) );
+                    $this->_extension_url = site_url( str_replace( trailingslashit( str_replace( '\\', '/', ABSPATH ) ), '/', $this->_extension_dir ) );
                 }
 
                 self::get_post_values();
